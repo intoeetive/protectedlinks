@@ -70,10 +70,6 @@ To install the plugin, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Protected Links.
 
-## Protected Links Roadmap
+## Support
 
-Some things to do, and ideas for potential features:
-
-* Release it
-
-Brought to you by [Yurii Salimovskyi](http://www.intoeetive.com/)
+If you encounter any issues with the plugin, please post to GitHub issues.
