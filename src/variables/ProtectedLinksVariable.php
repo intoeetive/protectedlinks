@@ -91,7 +91,7 @@ class ProtectedLinksVariable
         
         if (empty($params['assetId']))
         {
-            throw new Exception(Craft::t('protected-links', 'assetId cannot be empty'));
+            throw new Exception(Craft::t('protectedlinks', 'assetId cannot be empty'));
         }
         
         $params['checksum'] = sha1(serialize($params));
@@ -103,13 +103,13 @@ class ProtectedLinksVariable
                 ->one();
         if (!empty($link))
         {
-            return UrlHelper::actionUrl('protected-links/link/get', ['code' =>  $params['checksum']]);
+            return UrlHelper::actionUrl('protectedlinks/link/get', ['code' =>  $params['checksum']]);
         }
         
         Craft::$app->getDb()->createCommand()->insert('{{%protectedlinks_links}}', $params)->execute();
         
         $insertId = Craft::$app->getDb()->getLastInsertID();
 
-        return UrlHelper::actionUrl('protected-links/link/get', ['code' =>  $params['checksum']]);
+        return UrlHelper::actionUrl('protectedlinks/link/get', ['code' =>  $params['checksum']]);
     }
 }

@@ -63,7 +63,7 @@ class LinkController extends Controller
 
     /**
      * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/protected-links/link
+     * e.g.: actions/protectedlinks/link
      *
      * @return mixed
      */
@@ -76,7 +76,7 @@ class LinkController extends Controller
 
     /**
      * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/protected-links/link/do-something
+     * e.g.: actions/protectedlinks/link/do-something
      *
      * @return mixed
      */
@@ -94,12 +94,12 @@ class LinkController extends Controller
 
         if (empty($link))
         {
-            throw new Exception(Craft::t('protected-links', 'Link not found'));
+            throw new Exception(Craft::t('protectedlinks', 'Link not found'));
         }
         
         if (!empty($link['requireLogin']) && !$member_id)
         {
-            throw new ForbiddenHttpException(Craft::t('protected-links', 'You need to log in to access this file'));
+            throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You need to log in to access this file'));
         }
         
         if (!empty($link['denyHotlink']))
@@ -108,7 +108,7 @@ class LinkController extends Controller
             $site_url = $site_url_a[0];
             if (strpos(Craft::$app->getRequest()->getReferrer(), $site_url)===false)
             {
-                throw new ForbiddenHttpException(Craft::t('protected-links', 'Hotlinking not allowed for this file'));
+                throw new ForbiddenHttpException(Craft::t('protectedlinks', 'Hotlinking not allowed for this file'));
             }
         }
         
@@ -116,7 +116,7 @@ class LinkController extends Controller
         {
             if (DateTimeHelper::isInThePast($link['dateExpires']))
             {
-                throw new ForbiddenHttpException(Craft::t('protected-links', 'Link has expired'));
+                throw new ForbiddenHttpException(Craft::t('protectedlinks', 'Link has expired'));
             }
         }
         
@@ -124,12 +124,12 @@ class LinkController extends Controller
         {
             if (!$member_id)
             {
-                throw new ForbiddenHttpException(Craft::t('protected-links', 'You need to log in to access this file'));
+                throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You need to log in to access this file'));
             }
             $members = unserialize($link['members']);
             if (!in_array($member_id, $members))
             {
-                throw new ForbiddenHttpException(Craft::t('protected-links', 'You are not allowed to access this file'));
+                throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You are not allowed to access this file'));
             }
         }
         
@@ -137,7 +137,7 @@ class LinkController extends Controller
         {
             if (!$member_id)
             {
-                throw new ForbiddenHttpException(Craft::t('protected-links', 'You need to log in to access this file'));
+                throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You need to log in to access this file'));
             }
             $memberGroups = unserialize($link['memberGroups']);
             $isInGroup = false;
@@ -150,7 +150,7 @@ class LinkController extends Controller
             }
             if (!$isInGroup)
             {
-                throw new ForbiddenHttpException(Craft::t('protected-links', 'You are not allowed to access this file'));
+                throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You are not allowed to access this file'));
             }
         }
         

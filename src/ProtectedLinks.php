@@ -99,7 +99,7 @@ class ProtectedLinks extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['siteActionTrigger1'] = 'protected-links/link';
+                $event->rules['siteActionTrigger1'] = 'protectedlinks/link';
             }
         );
 
@@ -128,7 +128,7 @@ class ProtectedLinks extends Plugin
             Element::EVENT_REGISTER_TABLE_ATTRIBUTES,
             function(RegisterElementTableAttributesEvent $e) {
                 $e->tableAttributes['downloads'] = [
-                    'label' => Craft::t('protected-links', 'Downloads')
+                    'label' => Craft::t('protectedlinks', 'Downloads')
                 ];
         });
         
@@ -143,7 +143,7 @@ class ProtectedLinks extends Plugin
             Asset::class,
             Element::EVENT_REGISTER_SORT_OPTIONS,
             function(RegisterElementSortOptionsEvent $e) {
-                //$e->sortOptions['protectedlinks_links.downloads'] = Craft::t('protected-links', 'Downloads');
+                //$e->sortOptions['protectedlinks_links.downloads'] = Craft::t('protectedlinks', 'Downloads');
         });*/
         
         /*Event::on(
@@ -194,16 +194,21 @@ class ProtectedLinks extends Plugin
         );*/
         
 
-        // Do something after we're installed
-        /*Event::on(
+        // Pingback about this install
+        Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
             function (PluginEvent $event) {
                 if ($event->plugin === $this) {
-                    // We were just installed
+                    // Collect some data about this site
+                    $generalConfig = Craft::$app->getConfig()->getGeneral();
+                    $pingbackData = [
+                        'siteUrl'   => $generalConfig->siteUrl,
+                        'siteName'   => $generalConfig->siteName
+                    ];
                 }
             }
-        );*/
+        );
 
 /**
  * Logging in Craft involves using one of the following methods:
@@ -225,7 +230,7 @@ class ProtectedLinks extends Plugin
  */
         Craft::info(
             Craft::t(
-                'protected-links',
+                'protectedlinks',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),

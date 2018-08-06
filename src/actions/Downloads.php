@@ -36,7 +36,7 @@ class Downloads extends ElementAction
     public function init()
     {
         if ($this->label === null) {
-            $this->label = Craft::t('protected-links', 'Downloads');
+            $this->label = Craft::t('protectedlinks', 'Downloads');
         }
     }
 

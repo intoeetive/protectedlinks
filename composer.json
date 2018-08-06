@@ -1,18 +1,20 @@
 {
-    "name": "intoeetive/protected-links",
+    "name": "intoeetive/protectedlinks",
     "description": "Secure & restricted files download",
     "type": "craft-plugin",
     "version": "0.0.1-RC1",
     "keywords": [
         "craft",
-        "cms",
         "craftcms",
         "craft-plugin",
-        "protected links"
+        "protected links",
+        "downloads", 
+        "assets", 
+        "restricted content"
     ],
     "support": {
-        "docs": "https://github.com/intoeetive/protected-links/blob/master/README.md",
-        "issues": "https://github.com/intoeetive/protected-links/issues"
+        "docs": "https://github.com/intoeetive/protectedlinks/blob/master/README.md",
+        "issues": "https://github.com/intoeetive/protectedlinks/issues"
     },
     "license": "MIT",
     "authors": [
@@ -31,10 +33,10 @@
     },
     "extra": {
         "name": "Protected Links",
-        "handle": "protected-links",
+        "handle": "protectedlinks",
         "hasCpSettings": false,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/intoeetive/protected-links/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/intoeetive/protectedlinks/master/CHANGELOG.md",
         "components": {
             "link": "intoeetive\\protectedlinks\\services\\Link"
         },
