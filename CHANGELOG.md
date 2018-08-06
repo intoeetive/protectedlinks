@@ -7,3 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 0.0.1-RC1 - 2018-04-23
 ### Added
 - Initial release
+
+## 0.0.1-RC2 - 2018-08-06
+### Changed
+- Plugin handle fixes
