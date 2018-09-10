@@ -43,6 +43,10 @@ Limit access to members with ID 1, 7 and 13; set the link to expire tomorrow:
 {{ craft.protectedLinks.link({assetId: 105, members: [1,7,13], dateExpires: now|date_modify('+1 day')|date('Y-m-d')}) }}
 ```
 
+Admin users can download files even if they are restricted to other user or group. 
+
+In addition to it's own checks, Protected Links also respects permissions set on Asset Volume in Craft.
+
 ### Parameters
 
 | Parameter | Explanation |
@@ -66,7 +70,7 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require intoeetive/protectedlinks
+        composer require intoeetive/protected-links
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Protected Links.
 

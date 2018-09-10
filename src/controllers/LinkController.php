@@ -120,7 +120,7 @@ class LinkController extends Controller
             }
         }
         
-        if (!empty($link['members']))
+        if (!empty($link['members']) && Craft::$app->getUser()->getIdentity()->admin===false)
         {
             if (!$member_id)
             {
@@ -133,7 +133,7 @@ class LinkController extends Controller
             }
         }
         
-        if (!empty($link['memberGroups']))
+        if (!empty($link['memberGroups']) && Craft::$app->getUser()->getIdentity()->admin===false)
         {
             if (!$member_id)
             {

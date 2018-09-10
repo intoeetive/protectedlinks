@@ -2,7 +2,7 @@
     "name": "intoeetive/protectedlinks",
     "description": "Secure & restricted files download",
     "type": "craft-plugin",
-    "version": "0.0.1-RC2",
+    "version": "0.0.2",
     "keywords": [
         "craft",
         "craftcms",
