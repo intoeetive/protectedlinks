@@ -205,8 +205,16 @@ class LinkController extends Controller
                 return;
             }
         }
-        
-        if (!Craft::$app->getUser()->checkPermission($permissionName.':'.$asset->volumeId)) {
+
+        // choose $volumeId by Craft version
+        if (version_compare(Craft::$app->getInfo()->version, "3.1", "<")) {
+            // 3.0.x
+            $volumeId = $asset->volumeId;
+        } else {
+            //3.1.x
+            $volumeId = $asset->getVolume()->uid;
+        }
+        if (!Craft::$app->getUser()->checkPermission($permissionName.':'.$volumeId)) {
             throw new ForbiddenHttpException('User is not permitted to perform this action');
         }
     }
