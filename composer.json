@@ -2,7 +2,6 @@
     "name": "intoeetive/protectedlinks",
     "description": "Secure & restricted files download",
     "type": "craft-plugin",
-    "version": "0.0.4",
     "keywords": [
         "craft",
         "craftcms",
@@ -24,7 +23,7 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0-RC1"
+        "craftcms/cms": "^4.0.0"
     },
     "autoload": {
         "psr-4": {

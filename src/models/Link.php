@@ -1,6 +1,6 @@
 <?php
 /**
- * Protected Links plugin for Craft CMS 3.x
+ * Protected Links plugin for Craft CMS 4.x
  *
  * Secure & restricted files download
  *
@@ -62,7 +62,7 @@ class Link extends Model
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['assetId', 'integer']

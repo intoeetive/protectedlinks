@@ -1,6 +1,6 @@
 <?php
 /**
- * Protected Links plugin for Craft CMS 3.x
+ * Protected Links plugin for Craft CMS 4.x
  *
  * Secure & restricted files download
  *
@@ -73,7 +73,7 @@ class ProtectedLinks extends Plugin
      *
      * @var string
      */
-    public $schemaVersion = '0.0.1';
+    public string $schemaVersion = '0.0.1';
 
     // Public Methods
     // =========================================================================
@@ -113,16 +113,16 @@ class ProtectedLinks extends Plugin
                 $variable->set('protectedLinks', ProtectedLinksVariable::class);
             }
         );
-        
+
         /*Event::on(
-            Asset::class, 
-            Element::EVENT_REGISTER_ACTIONS, 
-            function(RegisterElementActionsEvent $event) 
+            Asset::class,
+            Element::EVENT_REGISTER_ACTIONS,
+            function(RegisterElementActionsEvent $event)
             {
                 $event->actions[] = Downloads::class;
             }
         );*/
-        
+
         Event::on(
             Asset::class,
             Element::EVENT_REGISTER_TABLE_ATTRIBUTES,
@@ -131,28 +131,28 @@ class ProtectedLinks extends Plugin
                     'label' => Craft::t('protectedlinks', 'Downloads')
                 ];
         });
-        
+
         Event::on(
             Asset::class,
             Element::EVENT_REGISTER_DEFAULT_TABLE_ATTRIBUTES,
             function(RegisterElementDefaultTableAttributesEvent $e) {
                 $e->tableAttributes[] = 'downloads';
         });
-        
+
         /*Event::on(
             Asset::class,
             Element::EVENT_REGISTER_SORT_OPTIONS,
             function(RegisterElementSortOptionsEvent $e) {
                 //$e->sortOptions['protectedlinks_links.downloads'] = Craft::t('protectedlinks', 'Downloads');
         });*/
-        
+
         /*Event::on(
             Asset::class,
             Element::EVENT_REGISTER_SOURCES,
             function(RegisterElementSourcesEvent $e) {
                 //Craft::dd($e);
         });*/
-        
+
         Event::on(
             Asset::class,
             Element::EVENT_SET_TABLE_ATTRIBUTE_HTML,
@@ -162,7 +162,7 @@ class ProtectedLinks extends Plugin
                 }
             }
         );
-        
+
         /*Event::on(
             Asset::class,
             Element::EVENT_REGISTER_SEARCHABLE_ATTRIBUTES,
@@ -170,8 +170,8 @@ class ProtectedLinks extends Plugin
                 $e->attributes[] = 'downloads';
             }
         );*/
-        
-        
+
+
         /*Event::on(
             ElementQuery::class,
             ElementQuery::EVENT_AFTER_PREPARE,
@@ -179,12 +179,12 @@ class ProtectedLinks extends Plugin
                 if ($e->sender->elementType == 'craft\\elements\\Asset')
                 {
                     $e->sender->query->addSelect('linkstats.downloads');
-                    
+
                     $subQuery = (new Query())
                         ->select('assetId, SUM(downloads) AS downloads')
                         ->from('{{%protectedlinks_links}}')
                         ->groupBy('assetId');
-                    
+
                     $e->sender->query->leftJoin(
                         ['linkstats' => $subQuery], 'assets.id = linkstats.assetId'
                     );
@@ -192,7 +192,7 @@ class ProtectedLinks extends Plugin
                 }
             }
         );*/
-        
+
 
         // Pingback about this install
         Event::on(
@@ -201,10 +201,10 @@ class ProtectedLinks extends Plugin
             function (PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // Collect some data about this site
-                    $generalConfig = Craft::$app->getConfig()->getGeneral();
+                    $currentSite = Craft::$app->getSites()->currentSite;
                     $pingbackData = [
-                        'siteUrl'   => $generalConfig->siteUrl,
-                        'siteName'   => $generalConfig->siteName
+                        'siteUrl'   => $currentSite->getBaseUrl(),
+                        'siteName'   => $currentSite->getName(),
                     ];
                 }
             }
