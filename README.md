@@ -12,7 +12,7 @@ The plugin can also be used to hide actual file location.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Usage
 
