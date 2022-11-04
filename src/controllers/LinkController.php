@@ -1,6 +1,6 @@
 <?php
 /**
- * Protected Links plugin for Craft CMS 3.x
+ * Protected Links plugin for Craft CMS 4.x
  *
  * Secure & restricted files download
  *
@@ -56,7 +56,7 @@ class LinkController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'get'];
+    protected array|int|bool $allowAnonymous = ['index', 'get'];
 
     // Public Methods
     // =========================================================================
@@ -83,9 +83,9 @@ class LinkController extends Controller
     public function actionGet()
     {
         $code = Craft::$app->getRequest()->getRequiredParam('code');
-        
+
         $member_id = Craft::$app->getUser()->getId();
-        
+
         $link = (new Query())
                 ->select('*')
                 ->from('{{%protectedlinks_links}}')
@@ -96,12 +96,12 @@ class LinkController extends Controller
         {
             throw new Exception(Craft::t('protectedlinks', 'Link not found'));
         }
-        
+
         if (!empty($link['requireLogin']) && !$member_id)
         {
             throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You need to log in to access this file'));
         }
-        
+
         if (!empty($link['denyHotlink']))
         {
             $site_url_a = explode("/", str_replace('https://www.', '', str_replace('http://www.', '', UrlHelper::baseSiteUrl())));
@@ -111,7 +111,7 @@ class LinkController extends Controller
                 throw new ForbiddenHttpException(Craft::t('protectedlinks', 'Hotlinking not allowed for this file'));
             }
         }
-        
+
         if (!empty($link['dateExpires']))
         {
             if (DateTimeHelper::isInThePast($link['dateExpires']))
@@ -131,7 +131,7 @@ class LinkController extends Controller
                 throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You are not allowed to access this file'));
             }
         }
-        
+
         if (!empty($link['memberGroups']) && Craft::$app->getUser()->getIdentity()->admin == false)
         {
             if (!$member_id)
@@ -152,7 +152,7 @@ class LinkController extends Controller
                 throw new ForbiddenHttpException(Craft::t('protectedlinks', 'You are not allowed to access this file'));
             }
         }
-        
+
         $assetService = Craft::$app->getAssets();
 
         $asset = $assetService->getAssetById($link['assetId']);
@@ -165,14 +165,14 @@ class LinkController extends Controller
         if (!empty($link['requireLogin']) || !empty($link['members']) || !empty($link['memberGroups'])) {
             $this->_requirePermissionByAsset('viewVolume', $asset);
         }
-        
+
         //update downloads counter
         Craft::$app->getDb()->createCommand()->update('{{%protectedlinks_links}}', ['downloads'=>$link['downloads']+1], ['id'=>$link['id']])->execute();
 
         // All systems go, engage hyperdrive! (so PHP doesn't interrupt our stream)
         App::maxPowerCaptain();
         $localPath = $asset->getCopyOfFile();
-        
+
         $downloadOptions = [];
         if (!empty($link['mimeType']))
         {
@@ -189,8 +189,8 @@ class LinkController extends Controller
 
         return $response;
     }
-    
-    
+
+
         /**
      * Require an Assets permissions.
      *
@@ -221,6 +221,6 @@ class LinkController extends Controller
         }
     }
 
-    
-    
+
+
 }

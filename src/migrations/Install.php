@@ -1,6 +1,6 @@
 <?php
 /**
- * Protected Links plugin for Craft CMS 3.x
+ * Protected Links plugin for Craft CMS 4.x
  *
  * Secure & restricted files download
  *
@@ -13,7 +13,7 @@ namespace intoeetive\protectedlinks\migrations;
 use intoeetive\protectedlinks\ProtectedLinks;
 
 use Craft;
-use craft\config\DbConfig;
+use craft\db\Connection;
 use craft\db\Migration;
 
 /**
@@ -147,9 +147,9 @@ class Install extends Migration
         );
         // Additional commands depending on the db driver
         switch ($this->driver) {
-            case DbConfig::DRIVER_MYSQL:
+            case Connection::DRIVER_MYSQL:
                 break;
-            case DbConfig::DRIVER_PGSQL:
+            case Connection::DRIVER_PGSQL:
                 break;
         }
     }
@@ -171,7 +171,7 @@ class Install extends Migration
             'CASCADE',
             'CASCADE'
         );
-        
+
         $this->addForeignKey(
             $this->db->getForeignKeyName('{{%protectedlinks_links}}', 'assetId'),
             '{{%protectedlinks_links}}',

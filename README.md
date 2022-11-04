@@ -1,4 +1,4 @@
-# Protected Links plugin for Craft CMS 3.x
+# Protected Links plugin for Craft CMS 4.x
 
 This plugin is intended to provide a way for restricting access to asset files and hide their actual location. Additionally, it will count downloads for each file.
 
@@ -6,13 +6,13 @@ This plugin is intended to provide a way for restricting access to asset files a
 
 The access can be restricted to logged in users, or only certain user, or to member groups. The access can also be set to expire.
 
-The plugin can also be used to hide actual file location. 
+The plugin can also be used to hide actual file location.
 
 ![Access restriction](resources/img/scr2.png)
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Usage
 
@@ -25,7 +25,7 @@ Hide the file location without any restrictions:
 
 Limit access to logged in users and display file inline in browser:
 ```
-{{ craft.protectedLinks.link({assetId: 105, inline: true, requireLogin: true)}
+{{ craft.protectedLinks.link({assetId: 105, inline: true, requireLogin: true}) }}
 ```
 
 Restrict file access to users in groups 1 and 7; allow access only when link is clicked on your site
@@ -35,7 +35,7 @@ Restrict file access to users in groups 1 and 7; allow access only when link is 
 
 Limit access to currently logged in user and display file inline in browser; make the link expire on 30th of April:
 ```
-{{ craft.protectedLinks.link({assetId: 105, inline: true, members: craft.app.user.id, dateExpires: date('2018-04-30')}) }}
+{{ craft.protectedLinks.link({assetId: 105, inline: true, members: craft.app.user.id, dateExpires: '2018-04-30'}) }}
 ```
 
 Limit access to members with ID 1, 7 and 13; set the link to expire tomorrow:
@@ -43,7 +43,7 @@ Limit access to members with ID 1, 7 and 13; set the link to expire tomorrow:
 {{ craft.protectedLinks.link({assetId: 105, members: [1,7,13], dateExpires: now|date_modify('+1 day')|date('Y-m-d')}) }}
 ```
 
-Admin users can download files even if they are restricted to other user or group. 
+Admin users can download files even if they are restricted to other user or group.
 
 In addition to it's own checks, Protected Links also respects permissions set on Asset Volume in Craft.
 
