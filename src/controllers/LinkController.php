@@ -163,7 +163,7 @@ class LinkController extends Controller
 
         //if membership is not required, asset permissions can be ignored
         if (!empty($link['requireLogin']) || !empty($link['members']) || !empty($link['memberGroups'])) {
-            $this->_requirePermissionByAsset('viewVolume', $asset);
+            $this->_requirePermissionByAsset('viewAssets', $asset);
         }
         
         //update downloads counter
